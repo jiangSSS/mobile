@@ -2,9 +2,9 @@
     <div>
         <Header></Header>
         <div v-infinite-scroll="loadMore" infinite-scroll-disabled="loading">
-            <div v-for="(item,index) in newsList" :key="index" :label="item">
-                <router-link :to="{path:'/list4_detail', query:{id:item.newsId}}" class="content">
-                    <img :src="item.pic" class="img">
+            <div v-for="(item,index) in newsList" :key="index">
+                <router-link :to="{path:'/list4_detail',query:{id:item.newsId}}" class="content clearfix">
+                    <img :src="item.pic" class="img fll">
                     <div class="title">
                         <p class="message-title">{{item.title}}</p>
                         <span class="date clearfix">
@@ -36,25 +36,24 @@
         data() {
             return {
                 newsList: [],
-                page:1,
-                isShow:false,
-                loading:false,
-                isLoading:false
+                page: 1,
+                isShow: false,
+                loading: false,
+                isLoading: false
             }
         },
         methods: {
-            loadMore(){
+            loadMore() {
                 this.page = this.page + 1,
-                this.getNews()
+                    this.getNews()
             },
             getNews() {
                 this.isLoading = true
-                this.$axios.get(`/news/newsList.do?page=${this.page}&rows=10&type=3`).then(res => {
-                    console.log(res)
+                this.$axios.get(`/news/newsList.do?page=${this.page}&rows=10&type=${this.type}`).then(res => {
                     if (res.code == 1) {
-                        this.newsList = [...this.newsList,...res.rows]
-                        this.loading = false    
-                        if(res.rows.length == 0){
+                        this.loading = false
+                        this.newsList = [...this.newsList, ...res.rows]
+                        if (res.rows.length == 0) {
                             this.loading = true
                             this.isShow = true
                             this.isLoading = false
@@ -64,6 +63,7 @@
             }
         },
         created() {
+            this.type = this.$route.meta.type
             this.getNews()
         }
     }
@@ -102,7 +102,8 @@
         text-align: center;
         color: #888;
     }
-    .loading{
+
+    .loading {
         display: flex;
         justify-content: center
     }

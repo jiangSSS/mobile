@@ -43,7 +43,8 @@ export default new Router({
       name: "list_1",
       component: () => import("@/components/Home/List_1.vue"),
       meta: {
-        title: "信工新闻眼"
+        title: "信工新闻眼",
+        type:0
       }
       // children:[
         
@@ -86,7 +87,8 @@ export default new Router({
       name: "list_4",
       component: () => import("@/components/Home/List_4.vue"),
       meta: {
-        title: "党建一点通"
+        title: "党建一点通",
+        type:3
       }
     },
     {
@@ -94,7 +96,8 @@ export default new Router({
       name: "list_5",
       component: () => import("@/components/Home/List_5.vue"),
       meta: {
-        title: "党员亮身份"
+        title: "党员亮身份",
+        type:5
       }
     },
     {
@@ -190,7 +193,8 @@ export default new Router({
       name: "learn",
       component: () => import("@/components/Banner/learn.vue"),
       meta: {
-        title: "随时随地学"
+        title: "随时随地学",
+        type:6
       }
     },
     {
@@ -198,7 +202,8 @@ export default new Router({
       name: "shoot",
       component: () => import("@/components/Banner/shoot.vue"),
       meta: {
-        title: "随时随地拍"
+        title: "随时随地拍",
+        type:7
       }
     },
     {
@@ -214,7 +219,8 @@ export default new Router({
       name: "system",
       component: () => import("@/components/Banner/system.vue"),
       meta: {
-        title: "制度建设"
+        title: "制度建设",
+        type:4
       }
     },
     {
@@ -222,7 +228,8 @@ export default new Router({
       name: "activity",
       component: () => import("@/components/Banner/activity.vue"),
       meta: {
-        title: "特色活动"
+        title: "特色活动",
+        type:1
       }
     },
     {

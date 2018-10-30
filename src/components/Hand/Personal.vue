@@ -9,7 +9,7 @@
             </el-upload>
         </div>
         <div class="submit">
-            <el-button type="danger" >提交审核</el-button>
+            <mt-button type="danger" >提交审核</mt-button>
         </div>
         
     </div>

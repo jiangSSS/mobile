@@ -51,6 +51,7 @@
 
 <script>
     import Header from "@/components/Header/com-header.vue"
+    import {mapState} from "vuex"
     export default {
         components:{
             Header
@@ -71,6 +72,9 @@
         },
         created(){
             this.getData()
+        },
+        computed:{
+            ...mapState(["userinfo","token"])
         }
     }
 </script>

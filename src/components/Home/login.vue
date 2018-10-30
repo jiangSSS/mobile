@@ -4,7 +4,7 @@
         <div class="login-logo">
             <img src="../../image/crop/logo.png" class="logo">
         </div>
-        <div class="form">
+        <div class="form" @submit.prevent>
             <input type="text" class="input" placeholder="身份证号" v-model="userInfo.id_card">
             <input type="password" class="input" placeholder="密码" v-model="userInfo.password">
             <mt-button type="danger" class="login" @click="handleLogin">登录</mt-button>
@@ -34,8 +34,10 @@
                 this.$axios.post("/user/userLogin.do",formData).then(res=>{
                     console.log(res)
                     if(res.code == 1){
-                        // this.$store.commit("USERINFO",res.data)
-                        this.$message.success(res.msg)
+                        this.$store.commit("USERINFO",res.data)
+                        this.$store.commit("TOKEN",res.token)
+                        this.$store.commit("LOGIN",'1')
+                        this.$message.success(res.msg)  
                         setTimeout(()=>{
                             this.$router.push("/own")
                         },1000)

@@ -20,11 +20,19 @@ const store = new Vuex.Store({
             joinPartyTime:"",
             lastPayTime:"",
             partyIdentity:"",
-        }
+        },
+        token:"",
+        login:""
     },
     mutations:{
         USERINFO (state,userinfo){
             state.userinfo = userinfo
+        },
+        TOKEN (state,token){
+            state.token = token
+        },
+        LOGIN (state,login){
+            state.login = login
         }
     },
     actions:{
@@ -33,8 +41,7 @@ const store = new Vuex.Store({
     plugins:[createPersistedState({
         storage:{
             getItem:key => sessionStorage.getItem(key),
-            setItem:(key,value)=>
-                sessionStorage.setItem(key,value),
+            setItem:(key,value)=> sessionStorage.setItem(key,value),
             removeItem: key => sessionStorage.removeItem(key),
         }
     })]

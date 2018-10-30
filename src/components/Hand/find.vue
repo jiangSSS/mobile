@@ -1,7 +1,8 @@
 <template>
     <div class="body-warp">
         <Header></Header>
-        <div class="bmap" id="bmap-warp"></div>
+        <!-- 必须要给地图设置高度 -->
+        <div class="bmap" id="bmap-warp"></div>  
     </div>
 </template>
 
@@ -16,13 +17,13 @@
                 var map = new BMap.Map("bmap-warp");                        // 创建地图实例  
 
                 var startpoint = new BMap.Point(114.02,32.98);              // 创建点坐标    
-                var startlabel = new BMap.Label("信息工程学院学生党支部",{
+                var startlabel = new BMap.Label("信息工程学院学生党支部",{    // 添加文本
                     offset:new BMap.Size(30,0)
-                })                                                         // 添加文本
+                })                                                         
                 var startmarker = new BMap.Marker(startpoint);              // 创建标注 
                 map.addOverlay(startmarker);                                // 将标注添加到地图中 
                 map.addOverlay(startlabel); 
-                startmarker.setLabel(startlabel)                                // 将文本添加到地图中 
+                startmarker.setLabel(startlabel)                            // 将文本添加到地图中 
 
                 var startpoint = new BMap.Point(114.02,32.98);             
                 var startlabel = new BMap.Label("信息工程学院党总部",{

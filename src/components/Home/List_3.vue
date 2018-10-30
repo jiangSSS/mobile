@@ -1,7 +1,7 @@
 <template>
     <div>
         <Header></Header>
-        <div class="cloud-content">
+        <div class="cloud-content" v-infinite-scroll="loadMore" infinite-scroll-disabled="loading">
             <div v-for="(item,index) in forumList" :key="index">
                 <div class="body-warp">
                     <div class="clearfix row">
@@ -27,6 +27,10 @@
                 </div>
             </div>
             <i class="iconfont icon-xinzeng add" @click="show = true"></i>
+            <div class="loading">
+                <img v-if="isLoading" src="../../image/crop/spinner.gif">
+            </div>
+            <p class="footer" v-if="isShow">没有更多数据了</p>
         </div>
         <van-popup v-model="show" position="bottom" :overlay="true" class="form">
             <el-input type="textarea" :autosize="{ minRows: 3, maxRows: 5}" class="textarea"></el-input>
@@ -45,15 +49,31 @@
         data() {
             return {
                 forumList: [],
-                show:false
+                show:false,
+                page:1,
+                isShow:false,
+                loading:false,
+                isLoading:false
             }
         },
         methods: {
+            loadMore(){
+                this.page = this.page + 1,
+                this.getForumList()
+            },
             getForumList() {
-                this.$axios.get("/forum/forumList.do?page=1&rows=10&type=0&cates=0").then(res => {
+                this.isLoading = true
+                this.$axios.get(`/forum/forumList.do?page=${this.page}&rows=10&type=0&cates=0`).then(res => {
                     console.log("党员云互动 >>", res)
                     if (res.code == 1) {
-                        this.forumList = res.rows
+                        this.loading = false
+                        this.forumList = [...this.forumList,...res.rows]
+                        if(res.rows.length == 0){
+                            this.loading = true
+                            this.isShow = true
+                            this.isLoading = false
+                            
+                        }
                     }
                 })
             }
@@ -138,5 +158,9 @@
         .textarea{
             margin-bottom: 0.3rem;
         }
+    }
+    .loading{
+        display: flex;
+        justify-content: center
     }
 </style>

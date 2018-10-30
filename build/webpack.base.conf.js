@@ -15,6 +15,7 @@ module.exports = {
   entry: {
     app: './src/main.js'
   },
+  //  地图
   externals:{
     "BMap":"BMap"
   },

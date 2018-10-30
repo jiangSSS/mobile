@@ -12,19 +12,7 @@
             <p>6、联系群众、关心群众、服务群众情况；</p>
             <p>7、遵守党章党规、法律法规和学校规章制度情况。</p>
         </div>
-        <el-form :inline="true" class="demo-form-inline">
-            <el-form-item >
-                <el-select placeholder="请选择">
-                    <el-option label="信息工程学院教职工第一党支部" value="shanghai"></el-option>
-                    <el-option label="信息工程学院教职工第二党支部" value="shanghai"></el-option>
-                    <el-option label="信息工程学院学生党支部" value="shanghai"></el-option>
-                    <el-option label="信息工程学院学生流动党支部(北京)" value="shanghai"></el-option>
-                </el-select>
-            </el-form-item>
-            <el-form-item>
-                <el-button type="primary" @click="onSubmit">下一步</el-button>
-            </el-form-item>
-        </el-form>
+      
 
     </div>
 </template>
