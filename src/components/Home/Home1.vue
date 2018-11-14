@@ -8,24 +8,18 @@
                 登录
             </router-link>
         </div>
-        <!-- <mt-swipe>
-            <mt-swipe-item v-for="(item,index) in swiperimg" :key="index">
-                 <router-link :to="{path:'newsDetail', query: {newsId:item.url}}">
-                    <img :src="item.imgUrl">
-                </router-link>              
-                <span class="desc">{{item.title}}</span>
-            </mt-swipe-item>          
-        </mt-swipe> -->
+        <div class="swiper">
+            <swiper :options="swiperOption">
+                <swiper-slide v-for="(item,index) in swiperData" :key="index">
+                    <router-link :to="{name:'newsDetail',params:{id:item.url}}">
+                        <img :src="item.imgUrl">
+                        <span class="swiper-title">{{item.title}}</span>
+                    </router-link>
+                </swiper-slide>
+                <div class="swiper-pagination" slot="pagination"></div>
+            </swiper>
+        </div>
 
-        <swiper :options="swiperOption" class="swiper">
-            <swiper-slide v-for="(item,index) in swiperData" :key="index" data-swiper-autoplay="2000">
-                <router-link :to="{name:'newsDetail',params:{id:item.url}}">
-                    <img :src="item.imgUrl">
-                    <span class="swiper-title">{{item.title}}</span>
-                </router-link>
-            </swiper-slide>
-            <div class="swiper-pagination" slot="pagination"></div>
-        </swiper>
 
         <div class="nav">
             <div class="row">
@@ -116,24 +110,43 @@
         },
         data() {
             return {
-                waitForTransition:true,
-                // autoplay:true,
                 swiperOption: {
+                    // 显示分页
                     pagination: {
-                        el: '.swiper-pagination'
-                    }
+                        el: '.swiper-pagination',
+                        clickable: true
+                    },
+                    waitForTransition: true,
+                    // 设置自动播放速度
+                    autoplay: {
+                        disableOnInteraction: false,
+                        delay: 2000
+                    },
+                    // 开启无限循环
+                    loop: false,
+                    //设置点击箭头
+                    paginationClickable: true,
+                    prevButton: '.swiper-button-prev',
+                    nextButton: '.swiper-button-next',
+                    //设置同屏显示的数量，默认为1，使用auto是随意的意思。
+                    slidesPerView: 1,
+                    //开启鼠标滚轮控制Swiper切换。可设置鼠标选项，或true使用默认值。
+                    mousewheel: false,
+                    //默认为false，普通模式：slide滑动时只滑动一格，并自动贴合wrapper，设置为true则变为free模式，slide会根据惯性滑动可能不止一格且不会贴合。
+                    // freeMode:true
+
                 },
                 swiperData: []
             };
         },
         methods: {
             getSwiperData() {
-                this.$axios.get("/carousel/carouselList.do?").then(res => {
+                this.$axios.get("/carousel/carouselList.do").then(res => {
                     console.log(res)
                     if (res.code == 1) {
-                        this.$nextTick(() => {
-                            this.swiperData = res.rows
-                        })
+                        // this.$nextTick(() => {
+                        this.swiperData = res.rows
+                        // })
                     }
                 })
             }
@@ -141,14 +154,14 @@
         created() {
             this.getSwiperData()
         },
-        mounted() {
-            setInterval(() => {
-                console.log('simulate async data')
-                if (this.swiperData.length < 4) {
-                    this.swiperData.push(this.swiperData.length + 1)
-                }
-            }, 1000)
-        }
+        // mounted() {
+        //     setInterval(() => {
+        //         console.log('simulate async data')
+        //         if (this.swiperData.length < 4) {
+        //             this.swiperData.push(this.swiperData.length + 1)
+        //         }
+        //     }, 1000)
+        // }
     };
 </script>
 

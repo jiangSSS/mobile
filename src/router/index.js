@@ -272,6 +272,14 @@ export default new Router({
         title: "党费缴纳"
       }
     },
+    {
+      path: "/newsDetail",
+      name: "newsDetail",
+      component: () => import("@/components/Home/newsDetail.vue"),
+      meta: {
+        title: "轮播新闻"
+      }
+    },
     
   ]
 })
